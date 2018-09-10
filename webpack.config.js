@@ -4,7 +4,7 @@ const OptimizeJsPlugin = require('optimize-js-plugin');
 const ReactHotLoader = require('react-hot-loader');
 
 const plugins = [new HtmlWebpackPlugin({
-    template: 'src/index.html',
+    template: 'client/index.html',
     filename: 'index.html',
     inject: 'body'
 })];
@@ -20,14 +20,22 @@ module.exports = (env) => {
     const environment = env || 'production';
     return {
     mode: environment,
-    entry: './src/index.js',
+    entry: './client/index.js',
         output: {
-            path: path.resolve(__dirname, 'build'),
-            filename: 'app.' + environment + '.bundle.js'
+            path: path.resolve(__dirname, 'public'),
+            filename: 'app.bundle.js'
     },
     optimization: {
         minimize: false
     },
+    devServer: {
+        proxy: {
+            '/socket.io': {
+                target: 'http://localhost:3000',
+                ws: true
+            }
+        }
+      },
     module: {
         rules: [
             {
