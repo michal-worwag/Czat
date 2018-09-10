@@ -11,16 +11,16 @@ const UsersService = require('./UsersService');
 
 const usersService = new UsersService();
 
-app.use(express.static(`${_dirname}/public`));
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/', (req, res) => {
-    res.sendFile(`${_dirname}/index.html`);
+    res.sendFile(`${__dirname}/index.html`);
 })
 
 io.on('connection', (socket) => {
     socket.on('join', (name) => {
         usersService.addUser({
-            id: scoket.id,
+            id: socket.id,
             name
         })
     })
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
     })
 })
 
-server.listen(300, () => {
+server.listen(3000, () => {
     console.log('listening on *:3000');
 })
 

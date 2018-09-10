@@ -33,7 +33,7 @@ class App extends Component {
 
     handleMessageSubmit(message){
         const messages = [message, ...this.state.messages];
-        tgis.setState({messages});
+        this.setState({messages});
         socket.emit('message', message);
     }
 

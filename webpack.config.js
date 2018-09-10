@@ -18,6 +18,7 @@ module.exports = (env) => {
         )
     }
     const environment = env || 'production';
+
     return {
     mode: environment,
     entry: './client/index.js',
